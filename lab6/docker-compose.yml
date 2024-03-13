@@ -1,0 +1,24 @@
+version: "3.9"
+
+services:
+  mongodb:
+    image: mongo:7
+    container_name: mongo_itmo
+    restart: on-failure
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: mongo
+      MONGO_INITDB_ROOT_PASSWORD: mongo
+    volumes:
+      - mongo_itmo_data:/data/db
+    ports:
+      - 27017:27017
+    networks:
+      - mongo_itmo_network
+
+volumes:
+  mongo_itmo_data:
+    name: mongo_itmo_data
+
+networks:
+  mongo_itmo_network:
+    name: mongo_itmo_network

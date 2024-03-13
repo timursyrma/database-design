@@ -1,0 +1,25 @@
+version: "3.9"
+
+services:
+  anonymizer:
+    image: registry.gitlab.com/dalibo/postgresql_anonymizer:latest
+    container_name: postgresql_anonymizer
+    restart: on-failure
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    volumes:
+      - postgres_itmo_data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    networks:
+      - postgres_itmo_network
+
+volumes:
+  postgres_itmo_data:
+    name: postgres_itmo_data
+
+networks:
+  postgres_itmo_network:
+    name: postgres_itmo_network
